@@ -1,0 +1,7 @@
+image: gdmello/esrally:2.0
+track: geopoint
+targetHosts: "10.7.18.31:30614,10.7.18.33:30614,10.7.18.29:30614"
+pipeline: benchmark-only
+challenge: append-no-conflicts
+reportDir: /tmp
+reportFile: report-mem-lock.csv

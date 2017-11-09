@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "fullname" . }}
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+      - name: esrally
+        args:
+          - --track={{ .Values.track }}
+          - --target-hosts={{ .Values.targetHosts }}
+          {{- if .Values.pipeline }}
+          - --pipeline={{ .Values.pipeline }}
+          {{ end}}
+          - --challenge={{ .Values.challenge }}
+          {{- if .Values.includeTasks }}
+          - --include-tasks={{ .Values.includeTasks }}
+          {{ end}}
+          {{- if and .Values.reportDir .Values.reportFile }}
+          - --report-file={{ .Values.reportDir }}/{{ .Values.reportFile }}
+          - --report-format=csv
+          {{ end}}
+        image: {{ .Values.image }}
+      {{- if .Values.reportDir }}
+        volumeMounts:
+        - name: report
+          mountPath: {{ .Values.reportDir }}
+      restartPolicy: Never
+      volumes:
+      - name: report
+        hostPath:
+          path: {{ .Values.reportDir }}
+      {{ end }}
