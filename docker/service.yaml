@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: elasticsearch
+  name: elasticsearch-svc
+  namespace: ft
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 9200
+  selector:
+    name: elasticsearch-data
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
