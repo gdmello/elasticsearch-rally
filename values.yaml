@@ -1,7 +1,8 @@
-image: gdmello/esrally:2.0
+image: elastic/rally:latest
 track: geopoint
-targetHosts: "10.7.18.31:30614,10.7.18.33:30614,10.7.18.29:30614"
+targetHosts: "https://743685yhf3hf89348yr94.es.europe-west2.gcp.cloud.es.io"
 pipeline: benchmark-only
 challenge: append-no-conflicts
+clientOptions: "use_ssl:true,verify_certs:true,basic_auth_user:'big_smelly',basic_auth_password:'big_smelly1'"
 reportDir: /tmp
 reportFile: report-mem-lock.csv

@@ -11,8 +11,10 @@ spec:
       containers:
       - name: esrally
         args:
+          - race
           - --track={{ .Values.track }}
           - --target-hosts={{ .Values.targetHosts }}
+          - --client-options={{ .Values.clientOptions }}
           {{- if .Values.pipeline }}
           - --pipeline={{ .Values.pipeline }}
           {{ end}}
